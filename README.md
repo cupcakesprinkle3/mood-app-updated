@@ -14,13 +14,14 @@ In addition to the APIs and GitHub, the app uses HTML, CSS, JavaScipt, and Bulma
 
 ## Roadmap (Future Development)
 Future plans include:
+* Making the updated "meh" inspirational action responsive
 * Giving the user the option to disable "safe-mode" on the Joke API
 * Making the white boxes (Bulma styling) appear with the joke, not ahead of the joke
 * Saving the last quote image into localStorage to appear by default the next time you start the app
 * Resizing and better aligning the joke boxes and quote boxes for an improved aesthetic
 
 ## Screenshot
-![Screen Shot 2021-05-09 at 4 54 24 PM](https://user-images.githubusercontent.com/79061264/117591047-52eb0500-b0e7-11eb-888c-ce31547757b9.png)
+![Screen Shot 2025-06-06 at 10 07 24 AM](https://github.com/user-attachments/assets/9bab92fd-6946-4aa8-8d63-02da4ffd5b49")
 
 ## Original Repo
 

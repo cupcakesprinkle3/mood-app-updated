@@ -22,8 +22,12 @@ Future plans include:
 ## Screenshot
 ![Screen Shot 2021-05-09 at 4 54 24 PM](https://user-images.githubusercontent.com/79061264/117591047-52eb0500-b0e7-11eb-888c-ce31547757b9.png)
 
+## Original Repo
+
+https://github.com/cody-callahan/mood-plus-plus
+
 ## Deployed Application
 
-NEWLY UPDATED! https://mood-plus-plus.netlify.app/
+THIS NEWLY UPDATED APP! https://mood-plus-plus.netlify.app/
 
 ORIGINAL with non-working API - https://cody-callahan.github.io/mood-plus-plus/

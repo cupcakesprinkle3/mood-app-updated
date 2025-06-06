@@ -21,7 +21,7 @@ Future plans include:
 * Resizing and better aligning the joke boxes and quote boxes for an improved aesthetic
 
 ## Screenshot
-![Screen Shot 2025-06-06 at 10 07 24 AM](https://github.com/user-attachments/assets/9bab92fd-6946-4aa8-8d63-02da4ffd5b49")
+![Screenshot Updated Mood Plus Plus App](https://github.com/user-attachments/assets/8e75d6f7-f1d0-4454-ba6e-30cc804462ee)
 
 ## Original Repo
 

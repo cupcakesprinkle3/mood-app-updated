@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/cupcakesprinkle3/mood-app-updated/issues"
   },
-  "homepage": "https://github.com/cupcakesprinkle3/mood-app-updated#readme"
+  "homepage": "https://github.com/cupcakesprinkle3/mood-app-updated#readme",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
 }

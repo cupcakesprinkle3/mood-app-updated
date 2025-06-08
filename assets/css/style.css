@@ -18,6 +18,18 @@ p {
     padding: 20px;
 }
 
+/* .message.is-success .message-header {
+  color: white;
+} */
+
+.message-header p {
+  color: white !important;
+}
+
+/* .message.is-success {
+  background-color: #2ecc71 !important;
+} */
+
 .footer-p {
       color:white;
 

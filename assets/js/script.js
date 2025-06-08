@@ -1,11 +1,20 @@
+// Updated script.js with fixed ZenQuotes click logic
+
 var imgHappy = document.querySelector("#happyButton");
 var imgMeh = document.querySelector("#mehButton");
 var showlastJoke = document.querySelector("#lastJoke");
 var lastJoke = localStorage.getItem("last joke");
+var showlastQuote = document.querySelector("#lastQuoteText");
+var lastQuote = localStorage.getItem("last quote");
+
 
 if (lastJoke != null) {
   showlastJoke.innerHTML = lastJoke;
-}; 
+};
+
+if (lastQuote != null) {
+  showlastQuote.innerHTML = "Last Quote: " + lastQuote;
+};
 
 imgHappy.addEventListener("click", function () {
   var jokeHere = document.querySelector("#happyText");
@@ -18,27 +27,25 @@ imgHappy.addEventListener("click", function () {
       "x-rapidapi-host": "jokeapi-v2.p.rapidapi.com"
     }
   })
-    .then(response => { 
-      // request was successful
+    .then(response => {
       if (response.ok) {
-      return response.json();
-    }
-      else {
-      alert("Error: " + response.statusText);
-        }
+        return response.json();
+      } else {
+        alert("Error: " + response.statusText);
+      }
     })
     .then(data => {
-      console.log(data);
       var setup = data.setup;
       var delivery = data.delivery;
-      var fullJoke = data.setup + "..." + data.delivery
-    
-      jokeHere.append("New Joke: " + fullJoke);
+      var fullJoke = data.setup + "..." + data.delivery;
+
+      /* jokeHere.append("New Joke: " + fullJoke); */
+      jokeHere.innerText = `"${fullJoke}"`;
 
       var storeJoke = localStorage.getItem("last joke");
       if (storeJoke != null) {
         showlastJoke.innerHTML = "Last Joke: " + storeJoke;
-      }; 
+      };
 
       localStorage.setItem("last joke", fullJoke);
     })
@@ -48,42 +55,45 @@ imgHappy.addEventListener("click", function () {
 });
 
 imgMeh.addEventListener("click", function () {
-  var QuotePic = document.querySelector("#QuoteNow");
-  //QuotePic.innerHTML = "";
- // no longer needed: QuotePic.innerHTML = "";
-  const canvas = document.getElementById("quoteCanvas");
-  const ctx = canvas.getContext("2d");
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
- 
-  fetch("https://healthruwords.p.rapidapi.com/v1/quotes/?size=medium&maxR=1&t=Wisdom", {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-key": "de5cbe4ed9msh2b83413369c5e7fp1efe2djsn1a22cdab5bb4",
-		"x-rapidapi-host": "healthruwords.p.rapidapi.com"
-	}
-})
-.then(response => {
-  if (response.ok) {
-    return response.json();
+  console.log("Meh button clicked");
+
+  const quoteTextBox = document.getElementById("quoteText");
+  if (!quoteTextBox) {
+    console.error("Quote text container not found.");
+    return;
   }
-    else {
-    alert("Error: " + response.statusText);
-      }
+
+  const proxyUrl = "https://api.allorigins.win/get?disableCache=true&url=";
+  const targetUrl = "https://zenquotes.io/api/random";
+
+  // Move current quote to last before fetching new one
+  var storeQuote = localStorage.getItem("current quote");
+  if (storeQuote != null) {
+    var showlastQuote = document.getElementById("lastQuoteText");
+    showlastQuote.innerHTML = "Last Quote: " + storeQuote;
+    localStorage.setItem("last quote", storeQuote);
+  }
+
+  fetch(proxyUrl + encodeURIComponent(targetUrl))
+    .then(response => response.ok ? response.json() : Promise.reject("Network error"))
+    .then(data => {
+      const parsed = JSON.parse(data.contents);
+      const quote = parsed[0].q;
+      const author = parsed[0].a;
+
+      localStorage.setItem("current quote", `"${quote}" — ${author}`);
+
+      quoteTextBox.innerHTML = `
+  <span style="display: block; margin-bottom: 0.5rem; font-size: 1.1rem; font-weight: 400; color: #4a4a4a;">
+    "${quote}"
+  </span>
+  <span style="font-size: 0.95rem; font-weight: 400; color: #4a4a4a;">
+    — ${author}
+  </span>
+`;
     })
-      .then(data => {
-        console.log(data);
-        console.log(data[0].media);
-        QuotePic.src = data[0].media;
-
-        var storeQuotePic = localStorage.getItem("last pic");
-        if (storeQuotePic != null) {
-          lastQuote.src = storeQuotePic;
-        }; 
-  
-        localStorage.setItem("last pic", data[0].media);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-
-      })
+    .catch(err => {
+      console.error("Quote fetch error:", err);
+      quoteTextBox.innerText = "Oops! Couldn't fetch a quote.";
+    });
+});
